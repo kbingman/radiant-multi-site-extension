@@ -7,15 +7,13 @@
       %tr
         - render_region :header do |header|
           - header.name_th do
-            %th Name
+            %th.name Name
           - header.match_th do
             %th Domain match
           - header.base_th do
             %th Base domain
           - header.modify_th do
-            %th Modify
-          - header.order_th do
-            %th Order
+            %th.actions Modify
       %tbody
         - if @sites.empty?
           %tr
@@ -24,15 +22,16 @@
           %tr[site]
             - render_region :row do |row|
               - row.name_td do
-                %td= link_to site.name, edit_admin_site_path(site)
+                %td.name
+                  = link_to site.name, edit_admin_site_path(site)
               - row.match_td do
                 %td= h(site.domain)
               - row.base_td do
                 %td= h(site.base_domain)
               - row.modify_td do
-                %td= link_to image("remove.png", :alt => "Remove"), admin_site_path(site), :method => :delete, :confirm => "Are you sure you want to permanently remove #{site.name}?"
-              - row.order_td do
-                %td= order_links(site)
+                %td.actions 
+                  = link_to image("remove.png", :alt => "Remove"), admin_site_path(site), :method => :delete, :confirm => "Are you sure you want to permanently remove #{site.name}?"
+                  = order_links(site)
 
   = render_region :bottom
 

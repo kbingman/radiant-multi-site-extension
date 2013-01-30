@@ -14,7 +14,7 @@ class MultiSiteExtension < Radiant::Extension
     SiteController.send :include, MultiSite::SiteControllerExtensions
     Admin::PagesController.send :include, MultiSite::PagesControllerExtensions
     admin.pages.index.add :bottom, "site_subnav"
-    tab 'Settings' do |tab|
+    tab 'Content' do |tab|
       tab.add_item 'Sites', '/admin/sites'
     end
     load_default_regions
@@ -27,8 +27,8 @@ class MultiSiteExtension < Radiant::Extension
     Radiant::AdminUI.class_eval { attr_accessor :sites }
     admin.sites = OpenStruct.new.tap do |sites|
       sites.index = Radiant::AdminUI::RegionSet.new do |index|
-        index.header.concat %w{name_th match_th base_th modify_th order_th}
-        index.row.concat %w{name_td match_td base_td modify_td order_td}
+        index.header.concat %w{name_th match_th base_th modify_th}
+        index.row.concat %w{name_td match_td base_td modify_td}
       end
       sites.edit = Radiant::AdminUI::RegionSet.new do |edit|
         edit.main.concat %w{edit_header edit_form}
